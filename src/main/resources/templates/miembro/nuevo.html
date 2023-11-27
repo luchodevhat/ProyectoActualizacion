@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{tienda/head :: head}">
+        <title>Vaping Soul</title>      
+    </head>
+    <body class="fondo">
+         <header th:replace="~{tienda/header :: nav}"/>
+         <form th:action="@{/miembros/guardar}" th:object="${miembro}" method="POST" class="was-validated form" enctype="multipart/form-data" 
+         style="color: white; background-color: rgba(0, 0, 0, 0.6)">
+            <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>   
+            <input type="hidden" name="idMiembro" th:field="*{idMiembro}"/>   
+            <input type="hidden" th:field="*{contrasena}">
+            <input type="hidden" th:if="${screen} == 'edit'" placeholder="Username" th:field="*{username}">
+            
+
+            <h1>Crear Miembro</h1>
+
+           
+            <input type="number" min="10000000" required placeholder="Identificación" th:field="*{identificacion}" style="background-color: #242424; color: #F0F0F0">
+                
+            <input type="text" placeholder="Username" th:field="*{username}" style="background-color: #242424; color: #F0F0F0">
+            
+            
+            <input type="text" placeholder="Nombre" th:field="*{nombre}" style="background-color: #242424; color: #F0F0F0">        
+            
+            
+            <input type="text" placeholder="Apellidos" th:field="*{apellidos}" style="background-color: #242424; color: #F0F0F0">            
+            
+            
+            <input type="email" required placeholder="Correo" th:field="*{correo}" style="background-color: #242424; color: #F0F0F0">            
+            
+            
+            <input type="text" placeholder="Teléfono" th:field="*{telefono}" style="background-color: #242424; color: #F0F0F0">
+            
+            
+            <div th:if="${screen} != 'edit'" class="container-password"  style="background-color: #242424; color: #F0F0F0">
+                <input type="password"  placeholder="Contraseña" th:field="*{contrasena}" style="background-color: #242424; color: #F0F0F0">
+                <i class="eye fa-sharp fa-solid fa-eye-slash" onclick="showEye()"></i>
+            </div>
+
+            <div class="checkbox">
+                <label for="activo">Activo</label>
+                <input class="" type="checkbox" name="active" id="activo" th:field="*{activo}">
+            </div>
+            <input type="file" onchange="readURL(this)" name="imagenFile" style="background-color: #242424; color: #F0F0F0">
+            <img id="blah" th:src="*{rutaImagen}" height="200">
+            <button style="background-color: #712CF9" type="submit">Agregar</button>
+        </form>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <footer th:replace="~{tienda/footer :: footer}"/>
+    </body>
+</html>

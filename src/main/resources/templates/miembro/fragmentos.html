@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <section th:fragment="listadoMiembros" id="miembros" style="margin-top: 50px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card" style="--bs-card-bg:rgba(255, 255, 255, 0); --bs-card-border-width: 0px; color: white">
+                            <div class="card-header">
+                                <h4>Listado de miembros</h4>
+                            </div>
+                            <div th:if="${miembros != null and !miembros.empty}">
+                                <table class="table table-striped table-hover" style="--bs-table-bg: rgba(0, 0, 0, 0); --bs-table-hover-bg: rgba(0, 0, 0, 0.8); 
+                                --bs-table-striped-color: rgba(255, 255, 255, 1); color: white; --bs-table-striped-bg: rgba(0, 0, 0, 0.6); --bs-table-hover-color: white;
+                                border-color: rgba(0, 0, 0, 0)">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th></th>
+                                            <th>Nombre</th>
+                                            <th>Correo</th>
+                                            <th>Teléfono</th>
+                                            <th>Activo</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="miembro, contador : ${miembros}">
+                                            <td>
+                                                <img style="width: 50px; border-radius: 50%; margin-left: 1em" th:src="@{${miembro.rutaImagen}}" alt="">
+                                            </td>
+                                            <td>[[${miembro.nombre}]] [[${miembro.apellidos}]]</td>
+                                            <td>[[${miembro.correo}]]</td>
+                                            <td>[[${miembro.telefono}]]</td>
+                                            <td th:text="${miembro.activo} ? 'Activo' : 'Inactivo'" />
+                                            <td><a th:href="@{/miembros/eliminar/}+${miembro.idMiembro}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i>Eliminar</a>
+                                                <a th:href="@{/miembros/modificar/}+${miembro.idMiembro}"
+                                                   class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i>Actualizar</a></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${miembros == null or miembros.empty}">
+                                <span>La lista se encuentra vacia</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        
+        <form th:fragment="form" th:action="@{/miembros/guardar}" th:object="${miembro}" method="POST" class="was-validated form" enctype="multipart/form-data"
+        style="margin-top: 50px; color: white; background-color: rgba(0, 0, 0, 0.6)">
+            <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>   
+            <input type="hidden" name="idMiembro" th:field="*{idMiembro}"/>   
+            <input type="hidden" th:field="*{contrasena}">
+            <input type="hidden" th:if="${screen} == 'edit'" placeholder="Username" th:field="*{username}">
+            
+
+            <h1>Modificar Miembro</h1>
+
+           
+            <input type="number" min="10000000" required placeholder="Identificación" th:field="*{identificacion}" style="background-color: #242424; color: #F0F0F0">
+            <input type="text" placeholder="Username" th:field="*{username}" style="background-color: #242424; color: #F0F0F0">
+            
+            
+            <input type="text" placeholder="Nombre" th:field="*{nombre}" style="background-color: #242424; color: #F0F0F0">        
+            
+            
+            <input type="text" placeholder="Apellidos" th:field="*{apellidos}" style="background-color: #242424; color: #F0F0F0">            
+            
+            
+            <input type="email" required placeholder="Correo" th:field="*{correo}" style="background-color: #242424; color: #F0F0F0">            
+            
+            
+            <input type="text" placeholder="Teléfono" th:field="*{telefono}" style="background-color: #242424; color: #F0F0F0">
+            
+            
+            <div th:if="${screen} != 'edit'" class="container-password" style="background-color: #242424; color: #F0F0F0">
+                <input type="password"  placeholder="Contraseña" th:field="*{contrasena}" style="background-color: #242424; color: #F0F0F0">
+                <i class="eye fa-sharp fa-solid fa-eye-slash" onclick="showEye()"></i>
+            </div>
+
+            <div class="checkbox">
+                <label for="activo">Activo</label>
+                <input class="" type="checkbox" name="active" id="activo" th:field="*{activo}">
+            </div>
+            <input type="file" onchange="readURL(this)" name="imagenFile" style="background-color: #242424; color: #F0F0F0">
+            <img id="blah" th:src="*{rutaImagen}" height="200">
+            <button type="submit" style="background-color: #712CF9">Modificar</button>
+        </form>
+        
+         <div th:fragment="add-button" class="add-button" style="margin-top: -70px">
+             <div style="background-color: #712CF9">
+                <a th:href="@{/miembros/nuevo}" >Agregar</a>
+                <i class="fa-solid fa-plus"></i> 
+             </div>
+        </div>
+        
+    </body>
+</html>

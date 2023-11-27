@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="tienda/head :: head">
+        <title>Vaping Soul</title>
+        <link rel="stylesheet" href="../../static/css/style_1.css" type="text/css"/> 
+    </head>
+
+    <body>
+
+        <!-- Navigation bar -->
+        <nav th:replace="tienda/header :: nav"></nav>
+
+        <div class="container">
+            <!-- Jubotron -->
+            <div class="jumbotron mx-auto mt-2" style="width: 65%; height: 400px;">
+                <h4 class="display-5">Vaping Soul!</h4>
+                <p th:text="${confirmationMessage}" class="lead">Te has registrado correctamente.</p>
+                <hr class="my-4">
+                    
+                <p class="lead"> 
+                        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                    </p>    
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer th:replace="tienda/footer :: footer"></footer>
+
+    </body>
+</html>

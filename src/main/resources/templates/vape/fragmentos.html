@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div th:fragment="vapes" class="container-vapes" style="margin-top: 50px">
+            <div th:each="vape: ${vapes}" class="vape" style="background-color: rgba(0, 0, 0, 0.5)">
+                <img th:src="@{${vape.rutaImagen}}"/>
+                <b><h3 style="color: white">[[${vape.nombre}]]</h3></b>
+                <b><p style="color: white">¢[[${vape.valor}]]</p></b>
+                <button style="background-color: #712CF9; color: white">Agregar</button>
+            </div>
+        </div>
+        
+    </body>
+
+
+
+</html>

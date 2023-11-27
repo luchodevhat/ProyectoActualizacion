@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{tienda/head :: head}">
+        <title>Vaping Soul</title>      
+    </head>
+
+    <body class="fondo">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: rgba(0, 0, 0, 0.5)">
+            <div class="container-fluid">
+                <a class="navbar-brand" style="color: white" th:href="@{/}">Vaping Soul</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <ul class="navbar-nav mr-auto">
+                        <div class="navbar-nav">
+                            <a class="nav-link active" aria-current="page" style="color: white" th:href="@{/index}">Home</a>
+                            <a class="nav-link active" aria-current="page" style="color: white" href="#">Services</a>
+                            <a class="nav-link active" aria-current="page" style="color: white" href="#">Prices</a>
+                            <a class="nav-link active" aria-current="page" style="color: white" href="#">Contact Us</a>
+                            <a class="nav-link active" aria-current="page" style="color: white" th:href="@{/miembros/listar}">Miembros</a>
+                            <a class="nav-link active" aria-current="page" style="color: white" th:href="@{/vapes/listar}">Vapes</a>
+                        </div>
+                    </ul>
+
+
+                    <ul class="navbar-nav ml-auto" id="users-nav-item" sec:authorize="isAuthenticated()">
+
+                        <!--region For ROLE_USER display shoppingg cart icon-->
+                        <!--======================================================================================-->
+                        <li class="nav-item d-flex">
+                            <span class="shopping-cart align-self-center mx-2 " sec:authorize="hasRole('ROLE_USER')">
+                                <a style="background-color: transparent!important;"
+                                   data-toggle="collapse"
+                                   href="#shopping-cart-collapse" aria-expanded="false"
+                                   aria-controls="shopping-cart-collapse">
+                                    <i class="fa fa-shopping-cart " id="shopping-cart-icon" aria-hidden="true"
+                                       style="background-color: transparent!important"></i>
+                                </a>
+                                <div class="collapse" id="shopping-cart-collapse" style="position: absolute;"></div>
+                                <div class="card card-body">
+                                    <p>Vapes:</p>
+                                    <a type="button" class="btn btn-primary" style="font-size: 90%" th:href="@{#}">
+                                        Go to shopping cart</a>
+                                </div>
+                            </span>
+                        </li>
+                        <!--======================================================================================-->
+                        <!--endregion-->
+
+
+                        <!--region Displaying hello + username-->
+                        <!--==============================================================================-->
+                        <li class="nav-item user-details">
+                            <a class="navbar-text" style="color: white" th:href="@{/perfil}">Hello <span sec:authentication="name"></span></a>
+                        </li>
+                        <!--=============================================================================-->
+                        <!--endregion-->
+
+
+                        <!--region For ROLE_ADMIN display admin page-->
+                        <!--================================================================================================-->
+                        <li class="nav-item d-flex">
+                            <i class="align-self-center fas fa-user-cog" style="color: white;"></i>
+                            <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/adminPage}">
+                                Admin Page
+                            </a>
+                        </li>
+                        <!--================================================================================================-->
+                        <!--endregion-->
+
+
+                        <!--region Logout button-->
+                        <!--==================================================================================-->
+                        <li class="nav-item" sec:authorize="isAuthenticated()" style="cursor: pointer">
+                            <form method="POST" th:action="@{/logout}">
+                                <button class="logout" style="font-weight: bold; font-size: 1rem; background-color: transparent; outline: none; border: none; margin: .7rem 0; color: #fff">Logout 
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </button>
+                            </form>
+                        </li>
+                        <!--==================================================================================-->
+                        <!--endregion-->
+                    </ul>
+
+                    <!--region Login and Register menu items-->
+                    <!--==========================================================================================-->
+                    <ul class="navbar-nav ml-auto" sec:authorize="!isAuthenticated()">
+                        <li class="nav-item d-flex flex-row">
+                            <i class="align-self-center fa fa-user-o " aria-hidden="true" style="color: white;"></i>
+                            <a class="nav-link mr-3" style="color: white" th:href="@{/login}" href="/login">Log In</a>
+                        </li>
+                        <li class="nav-item d-flex flex-row">
+                            <i class="align-self-center fa fa-sign-in " aria-hidden="true" style="color: white;"></i>
+                            <a class="nav-link" style="color: white" th:href="@{/registrarse}">Registrarse</a>
+                        </li>
+                    </ul>
+                    <!--==========================================================================================-->
+                    <!--endregion-->
+                </div>
+            </div>
+        </nav>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" style="transform: translateX(-5%)">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" data-bs-interval="3000">
+                                    <img src="https://cdn.discordapp.com/attachments/935264591305392151/1178743392881094656/EKO-STRAWBERRY-PCS.webp?ex=65774154&is=6564cc54&hm=66abee2fc9670525689cc923397f3ab26e3b2c711bfbbe1f7e67529b87e6d19a&" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item" data-bs-interval="3000">
+                                    <img src="https://cdn.discordapp.com/attachments/935264591305392151/1178743393585729676/EKO-GI-1.webp?ex=65774155&is=6564cc55&hm=d08de1f23ec8876478f5b955e83ba918062cc5fdcf6596d010700157b5a68305&" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item" data-bs-interval="3000">
+                                    <img src="https://cdn.discordapp.com/attachments/935264591305392151/1178743393136951316/EKO-SW-1.webp?ex=65774154&is=6564cc54&hm=a73f7a50d4c0c3b8d314386b0f2e0c91550364f1d889dc4bd932ac17752f600a&" class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="text-center" style="transform: translateX(190%) translateY(-200%)">
+                                <p style="color: white; font-size: 50px;">Bienvenido a</p>
+                                <p class="font-weight-bold" style="color: white; font-size: 78px;">Vaping Soul</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+    </body>
+    <br>
+        <br>
+            <br>
+                <br>
+                    <br>
+    <footer th:replace="~{tienda/footer :: footer}"/>
+</html>
+<!-- src/main/resources/templates/index.html -->
+

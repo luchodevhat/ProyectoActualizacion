@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{tienda/head :: head}">
+        <title>Vaping Soul</title>      
+    </head>
+    <body class="fondo">
+         <header th:replace="~{tienda/header :: nav}"/>
+         <a class="atras" th:href="@{/miembros/listar}" style="margin-top: 50px"><i class="fa-solid fa-left-long"></i></a>
+        <form th:replace="~{miembro/fragmentos :: form}"></form>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <footer th:replace="~{tienda/footer :: footer}"/>
+    </body>
+</html>
